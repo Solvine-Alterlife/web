@@ -1,10 +1,10 @@
 import Link from "next/link";
-import dbConnect from "../../lib/dbConnect";
-import Levelling from "../../models/Levelling";
+import dbConnect from "../lib/dbConnect";
+import Levelling from "../models/Levelling";
 import "inter-ui/inter.css";
-import { Heading } from "../../assets/components/Heading";
-import { CardNavbar } from "../../assets/components/CardNavbar";
-import { FallbackImg } from "../../assets/components/FallbackImg";
+import { Heading } from "../assets/components/Heading";
+import { CardNavbar } from "../assets/components/CardNavbar";
+import { FallbackImg } from "../assets/components/FallbackImg";
 
 
 /* Allows you to view user card info*/
@@ -25,7 +25,7 @@ const LevellingPage = ({ pet }) => {
               <p className="stats">Total XP: {pet.formatxp}</p>
               <p className="stats">Total Message: {pet.formatmessage}</p>
               <div className="btn-container">
-                <Link href="/discord-leaderboard">
+                <Link href="/">
                   <button className="btn view">← Go Back</button>
                 </Link>
               </div>

@@ -1,86 +1,144 @@
-import Head from "next/head";
-import Script from "next/script";
+import dbConnect from "../lib/dbConnect";
+import Levelling from "../models/Levelling";
+import { Heading } from "../assets/components/Heading";
+import { Navbar } from "../assets/components/Navbar";
+import { Roles } from "../assets/components/Roles";
+import { Footer } from "../assets/components/Footer";
 import "inter-ui/inter.css";
-import { ChakraProvider } from "@chakra-ui/react";
-import { Flex, Heading, Text, Link } from "@chakra-ui/layout";
+import Link from "next/link";
+import { FallbackImg } from "../assets/components/FallbackImg";
 
-const Page = () => {
-  return (
-    <ChakraProvider>
-      <Flex
-        w="100vw"
-        h="100vh"
-        backgroundColor="blackAlpha.900"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Head>
-          <title>Warung International</title>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          <meta name="title" content="Warung International" />
-          <meta
-            name="description"
-            content="Warung International hanya menjual Soto Ayam terbaik di tata surya dan sudah teruji klinis di lab ITB dan IPB."
-          />
-          <meta
-            name="keywords"
-            content="warung, international, warung international, aku ganteng"
-          />
-          <meta name="robots" content="index, follow" />
-          <meta name="revisit-after" content="3 days" />
-          <meta name="author" content="clemiee" />
-          <meta
-            property="og:image"
-            content="https://user-images.githubusercontent.com/27568445/167063748-4cf22a8e-0844-4d7e-8554-7166baa2957e.png"
-          />
-        </Head>
-        <Script src="https://analytics.warunginternational.eu.org/latest.js"></Script>
-        <Link
-          href="https://discord.gg/y4D5zbf4AQ"
-          _hover={{ textDecoration: "none" }}
-        >
-          <Heading fontFamily="Inter">
-            <Text
-              as="span"
-              sx={{
-                color: "transparent",
-                lineHeight: 1,
-                margin: 0,
-                py: "5em",
-                px: "5em",
-                animationPlayState: "paused",
-
-                background: `linear-gradient(0deg, rgba(230,77,77,1) 0%, rgba(187,138,67,1) 10%, rgba(204,156,19,1) 20%, rgba(5,210,64,1) 30%, rgba(31,227,163,1) 40%, rgba(72,190,204,1) 50%, rgba(105,114,247,1) 60%, rgba(208,99,254,1) 70%, rgba(255,53,209,1) 80%, rgba(255,0,214,1) 90%, rgba(255,0,0,1) 100%)`,
-                backgroundClip: "text",
-                backgroundSize: "100% 100%",
-              }}
-              _hover={{
-                animationDuration: "2s",
-                animationName: "anim",
-                animationIterationCount: "infinite",
-                animationDirection: "alternate-reverse",
-                animationPlayState: "running",
-              }}
-            >
-              warunginternational
-            </Text>
-          </Heading>
-        </Link>
-
-        <style jsx>{`
-        @keyframes anim {
-          from {
-            background-position-y: 0;
+const Index = ({ pets }) => (
+  <>
+    <Heading />
+    <Navbar />
+    <section id="about">
+      <div className="container">
+        <div className="row animate__animated animate__rubberBand ">
+          <div className="tabs">
+            <input type="radio" name="tabs" defaultChecked={true} />
+            <label>Default</label>
+            <div className="tab">
+              <div className="leaderboardBody animate__animated animate__rubberBand ">
+                <div className="col-lg-8 mx-auto leaderboardPlayersListContainer">
+                  <div className="loader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                  <div className="leaderboardPlayersList">
+                    {pets.map((pet, index) => (
+                      <player key={pet._id}>
+                        <div className="leaderboardPlayer">
+                          <div className="leaderboardPlayerLeft">
+                            <div
+                              className={
+                                index === 0
+                                  ? "leaderboardRank leaderboardRankFirst"
+                                  : index === 1
+                                    ? "leaderboardRank leaderboardRankSecond"
+                                    : index === 2
+                                      ? "leaderboardRank leaderboardRankThird"
+                                      : "leaderboardRank"
+                              }
+                            >
+                              {index + 1}
+                            </div>
+                            <div className="leaderboardPlayerIcon">
+                              <FallbackImg
+                                src={pet.image_url}
+                              />
+                            </div>
+                            <div className="leaderboardPlayerUsername">
+                              {pet.displayname}
+                            </div>
+                          </div>
+                          <div className="leaderboardPlayerStats">
+                            <div className="leaderboardPlayerStatBlock remove-mobile nonpriority">
+                              <div className="leaderboardPlayerStatName">MESSAGES</div>
+                              <div className="leaderboardPlayerStatValue">
+                                {pet.formatmessage}
+                              </div>
+                            </div>
+                            <div className="leaderboardPlayerStatBlock remove-mobile nonpriority">
+                              <div className="leaderboardPlayerStatName">EXPERIENCE</div>
+                              <div className="leaderboardPlayerStatValue">
+                                {pet.formatxp}
+                              </div>
+                            </div>
+                            <div className="leaderboardPlayerStatBlock remove-mobile">
+                              <div className="leaderboardPlayerStatName">LEVEL</div>
+                              <div className="leaderboardPlayerStatValue">
+                                {pet.level}
+                              </div>
+                            </div>
+                            <div className="leaderboardPlayerStatBlock">
+                              <div className="leaderboardPlayerStatName"></div>
+                              <div className="leaderboardPlayerStatValue">
+                                <Link
+                                  href="/[userid]"
+                                  as={`/${pet._id}`}
+                                >
+                                  <button className="btn btn-primary">Details</button>
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="leaderboardPlayerSep"></div>
+                      </player>
+                    ))}
+                  </div>
+                </div>
+                <Roles />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <style jsx>{`
+          .btn {
+            --accent: grey;
+            cursor: pointer;
+            background: transparent;
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-size: 90%;
+            letter-spacing: 1px;
+            transition: 0.5s all;
+            outline: none;
           }
-          to {
-            background-position-y: 10em;
+          
+          .btn:hover {
+            background: var(--accent);
+            color: white;
           }
-        }
-      `}</style>
-      </Flex>
-    </ChakraProvider>
-  );
-};
+          
+          .view.btn {
+            --accent: lightblue;
+            margin-left: 10px;
+          }
+        `}</style>
+    <Footer />
+  </>
+);
 
-export default Page;
+/* Retrieves user(s) data from mongodb database */
+export async function getServerSideProps() {
+  await dbConnect();
+
+  /* find all the data in our database */
+  const result = await Levelling.find({});
+  const pets = result.map((doc) => {
+    const pet = doc.toObject();
+    pet._id = pet._id.toString();
+    return pet;
+  });
+  const sorted = pets.sort((a, b) => b.xp - a.xp);
+  return { props: { pets: sorted } };
+}
+
+export default Index;
