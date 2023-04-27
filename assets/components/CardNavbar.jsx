@@ -3,14 +3,14 @@
 export const CardNavbar = () => {
   return (
     <>
-    <header>
-      <div className="animate__animated animate__fadeInDown logo-navbar ">
-         <figure>
-            <img height="160px" width="160px" src="https://user-images.githubusercontent.com/27568445/167063748-4cf22a8e-0844-4d7e-8554-7166baa2957e.png" />
-         </figure>
-      </div>
-      <div className="banner"></div>
-   </header>
+      <header>
+        <div className="animate__animated animate__fadeInDown logo-navbar ">
+          <figure>
+            <img height="160px" width="160px" src="https://cdn.discordapp.com/attachments/1084453787802021909/1084454760532414524/solvine_alterlife_samp__1_-removebg-preview.png" />
+          </figure>
+        </div>
+        <div className="banner"></div>
+      </header>
     </>
   );
 };

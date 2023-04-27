@@ -6,9 +6,7 @@ export const Footer = () => {
     <>
         <footer className="text-center text-muted footer-dark">
         <br />
-        <a href="https://simpleanalytics.com/warunginternational.eu.org?utm_source=warunginternational.eu.org&utm_content=badge" referrerPolicy="origin" target="_blank" rel="noreferrer"><img src="https://simpleanalyticsbadges.com/warunginternational.eu.org?mode=dark" loading="lazy" crossOrigin="anonymous" /></a>
-        <br />
-        Created with ❤️ by <Link href="https://mcley.me">Clemie McCartney</Link>
+        Created with ❤️ by <Link href="https://gnztmpz.ovh">King_Ikhsan</Link>
         <br /><br />
       </footer>
     </>
