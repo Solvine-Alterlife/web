@@ -16,6 +16,20 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/Solvine-Alterlife/web/actions/workflows/production.yml">
+    <img src="https://github.com/Solvine-Alterlife/web/actions/workflows/production.yml/badge.svg" />
+  </a>
+  <br />
+</p>
+
+<p align="center">
+  <a href="https://github.com/Solvine-Alterlife/web/actions/workflows/preview.yml">
+    <img src="https://github.com/Solvine-Alterlife/web/actions/workflows/preview.yml/badge.svg" />
+  </a>
+  <br />
+</p>
+
+<p align="center">
   Solvine - A community for socialize and have fun.
 </p>
 
