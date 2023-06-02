@@ -131,7 +131,7 @@ export async function getServerSideProps() {
   await dbConnect();
 
   /* find all the data in our database */
-  const result = await Levelling.find({});
+  const result = await Levelling.find({}).limit(50);
   const pets = result.map((doc) => {
     const pet = doc.toObject();
     pet._id = pet._id.toString();
